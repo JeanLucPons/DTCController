@@ -29,6 +29,8 @@ This will compile and execute the program, if you make modifcation of the source
 
 ![](https://github.com/JeanLucPons/DTCController/blob/main/docs/sccr1.jpg)
 
+To disable a DTC, select disable in the class column. If you change settings of a DTC class, it will be applied to all DTC that belong to this class. The program outputs memory changes on the console.
+
 # How it works
 
 The address search algorithm is quite simple, it assumes that the first code of the internal code table is P1530 
