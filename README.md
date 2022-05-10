@@ -20,6 +20,8 @@ Microcontroller-Oriented Systems) A2L description file (ASAM-MCD-2MC) that conta
 - Execute: cd ..
 - Execute: java DTCController.EDC16C34
 
+![](https://github.com/JeanLucPons/DTCController/blob/main/docs/sccr1.jpg)
+
 # How it works
 
 The address search algorithm is quite simple, it assumes that the first code of the internal code table is P1530 
