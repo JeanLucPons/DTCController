@@ -1,25 +1,38 @@
 # DTCController
 
-DTCController is a java application that allows to edit DTC table. It supports only EDC16C34 PSA platform at the moment.
+DTCController is a java application that allows to edit DTC (Diagnostic Trouble Codes) table. It supports only EDC16C34 PSA platforms at the moment.
 The program tries to find the addresses of the needed tables using the strategy described bellow. It will work only on 
 PSA platform but can be extended to others vehicle. All contributions to this project are welcome.
 
-It is mandatory to open an original dump to find addresses. Then when you think the algorithm did
+It is mandatory to open an original dump (not necessary a full dump) to find addresses. Then, if you think the algorithm did
 a good job you can add your config to the list of know projects in the Dump.findDTCInfo() method. All projects 
 share same addresses independently of the software number. The project is the identifier of the DaMOS (DAtabase for 
 Microcontroller-Oriented Systems) A2L description file (ASAM-MCD-2MC) that contains addresses.
 
+**Important** DTCController does not compute any checksum, ensure that your OBD ECU programmer or your BDM compute the checksum for the modified files.
+
+# How to use
+
+-Download source code in a directory (or git clone the repository)
+-Install java JDK
+-Go to the directory where you have copied the source files
+-Execute: javac *.java
+-Execute: cd ..
+-Execute: java DTCController.EDC16C34
+
+git clone https://github.com/JeanLucPons/DTCController.git
+
 # How it works
 
 The address search algorithm is quite simple, it assumes that the first code of the internal code table is P1530 
-(Address of DSM_CDKDfp_ACCDPresAna_C) and the last one is P1621(Address of DSM_CDKDfp_WdCom_C).
-When the A2L file is generated, characteristics are sorted in alphabetic order (case sensitive).
-This is sufficient to determine addressed and number of DTC.
+(Address of DSM_CDKDfp_ACCDPresAna_C) and the last one is P1621 (Address of DSM_CDKDfp_WdCom_C). The algorithm can be found in Dump.findDTCInfo() method.
+When the A2L file is generated, default characteristics are sorted in alphabetic order (case sensitive). It is unlikely that a default characteristic is added before DSM_CDKDfp_ACCDPresAna_C or after DSM_CDKDfp_WdCom. However, it might fail. To check if the algorithm did a good job, check the correcpondance of DTC internal code and Code #1,#2,#4 and #4. If they are coherent, then you can relie on the result.
 
-**Note** Even for a same engine, a same EDC16C34, DTC table may be different (in size and/or in content),
-it depends on the project identifier (A2L).
+**Note** Even for a same engine, a same EDC16C34, DTC table may be different (size and/or content).
 
-|Idx|Adress|Code|Name|
+Here is an exemple with a known A2L file for a 206 1.6 HDI 110HP (Project C35374A).
+
+|Idx|Adress|Internal code|Name|
 |:--|:-----|:---|:---|
 |000|1C65AE|P0530|DSM_CDKDfp_ACCDPresAna_C|
 |001|1C65B0|P1506|DSM_CDKDfp_ACCDSwtin_C|
