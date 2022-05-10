@@ -13,14 +13,12 @@ Microcontroller-Oriented Systems) A2L description file (ASAM-MCD-2MC) that conta
 
 # How to use
 
--Download source code in a directory (or git clone the repository)
--Install java JDK
--Go to the directory where you have copied the source files
--Execute: javac *.java
--Execute: cd ..
--Execute: java DTCController.EDC16C34
-
-git clone https://github.com/JeanLucPons/DTCController.git
+- Download source code in a directory (or git clone the repository using git clone https://github.com/JeanLucPons/DTCController.git)
+- Install java JDK
+- Go to the directory where you have copied the source files
+- Execute: javac *.java
+- Execute: cd ..
+- Execute: java DTCController.EDC16C34
 
 # How it works
 
