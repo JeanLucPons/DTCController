@@ -33,7 +33,7 @@ This will compile and execute the program, if you make modifcation of the source
 
 The address search algorithm is quite simple, it assumes that the first code of the internal code table is P1530 
 (Address of DSM_CDKDfp_ACCDPresAna_C) and the last one is P1621 (Address of DSM_CDKDfp_WdCom_C). The algorithm can be found in Dump.findDTCInfo() method.
-When the A2L file is generated, default characteristics are sorted in alphabetic order (case sensitive). It is unlikely that a default characteristic is added before DSM_CDKDfp_ACCDPresAna_C or after DSM_CDKDfp_WdCom. However, it might fail. To check if the algorithm did a good job, check the correspondance of DTC internal code and Code #1,#2,#3 and #4. If they are coherent, then you can relie on the result. For instance, on the above example, you can see that P0530 is well related to P0532 and P0533 (Air Contioning faults).
+When the A2L file is generated, default characteristics are sorted in alphabetic order (case sensitive). It is unlikely that a default characteristic is added before DSM_CDKDfp_ACCDPresAna_C or after DSM_CDKDfp_WdCom. However, it might fail. To check if the algorithm did a good job, check the correspondance of DTC internal code and Code #1,#2,#3 and #4. If they are coherent, then you can relie on the result. For instance, on the above example, you can see that P0530 is well related to P0532 and P0533 (Air Conditioning faults).
 
 **Note** Even for a same engine, a same EDC16C34, DTC table may be different (size and/or content).
 
