@@ -11,12 +11,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 
 /**
  * Class to edit the DTC table on EDC16C34 platform
  */
-public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
+public class EDC16C34 extends JFrame implements ActionListener {
 
     public static final Font bigFont = new Font("Dialog",Font.BOLD,18);
 
@@ -28,6 +31,9 @@ public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
     private JMenu findMenu;
     private JMenuItem findMenuItem;
     private JMenuItem showAllMenuItem;
+    private JMenu sortMenu;
+    private JMenuItem sortClassMenuItem;
+    private JMenuItem noSortMenuItem;
     private JMenu classMenu;
 
     private JTextField softwareText;
@@ -46,6 +52,7 @@ public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
     private DTCInfo dtcInfo = null;
     private Vector<DTC> allDTC = new Vector<>();
     private Vector<DTC> filteredDTC = new Vector<>();
+    private int sortBy = 0;
 
     private String APP_RELEASE = "v0.1";
 
@@ -145,6 +152,15 @@ public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
         findMenu.add(showAllMenuItem);
         menuBar.add(findMenu);
 
+        sortMenu = new JMenu("Sort");
+        noSortMenuItem = new JMenuItem("None");
+        noSortMenuItem.addActionListener(this);
+        sortMenu.add(noSortMenuItem);
+        sortClassMenuItem = new JMenuItem("By class");
+        sortClassMenuItem.addActionListener(this);
+        sortMenu.add(sortClassMenuItem);
+        menuBar.add(sortMenu);
+
         classMenu = new JMenu("DTC Class");
         menuBar.add(classMenu);
         for(int i=1;i<=Dump.CLASS_NUMBER;i++) {
@@ -166,7 +182,10 @@ public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
         refPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.insets.left = 5;
+        gbc.insets.top = 2;
+        gbc.insets.bottom = 2;
+        gbc.insets.left = 2;
+        gbc.insets.right = 2;
 
         gbc.weightx = 1.0;
         fileText = new JTextField("");
@@ -233,7 +252,6 @@ public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
         dtcTable.setDefaultRenderer(JButton.class, new EnvClassCellRenderer());
         dtcTable.setDefaultEditor(JButton.class, new EnvClassCellEditor());
         dtcTable.setRowHeight(25);
-        dtcTable.addMouseListener(this);
         JScrollPane dtcView = new JScrollPane(dtcTable);
         add(dtcView,BorderLayout.CENTER);
 
@@ -249,32 +267,6 @@ public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
     public static void main(String[] args) {
 
         new EDC16C34();
-
-    }
-
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
 
     }
 
@@ -306,7 +298,17 @@ public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
                 updateTable();
             }
 
-        } else if (e.getSource()==showAllMenuItem) {
+        } else if (e.getSource()==sortClassMenuItem) {
+
+            sortBy = 1;
+            updateTable();
+
+        } else if (e.getSource()==noSortMenuItem) {
+
+            sortBy = 0;
+            updateTable();
+
+        } if (e.getSource()==showAllMenuItem) {
 
             filter = "";
             updateTable();
@@ -366,6 +368,19 @@ public class EDC16C34 extends JFrame implements MouseListener,ActionListener {
         for(int i = 0; i< allDTC.size(); i++) {
             if(allDTC.get(i).match(filter))
                 filteredDTC.add(allDTC.get(i));
+        }
+
+        if(sortBy>0) {
+            Collections.sort(filteredDTC, new Comparator<DTC>() {
+                @Override
+                public int compare(DTC o1, DTC o2) {
+                    switch (sortBy) {
+                        case 1: // By Class
+                            return Integer.compare(o1.getDTCClass(), o2.getDTCClass());
+                    }
+                    return 0;
+                }
+            });
         }
 
         String colName[] = {"" , "Internal code" , "Code #1" , "Code #2" , "Code #3" , "Code #4" , "Class", "Env"};

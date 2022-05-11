@@ -22,7 +22,7 @@ public class DTCEnvPanel extends JDialog implements ActionListener {
 
     JPanel innerPanel = new JPanel();
     innerPanel.setLayout(null);
-    innerPanel.setPreferredSize(new Dimension(365,200));
+    innerPanel.setPreferredSize(new Dimension(375,200));
 
     setContentPane(innerPanel);
     setTitle("DTC environement #" + dtcEnv.getDTCIdx());
@@ -34,7 +34,7 @@ public class DTCEnvPanel extends JDialog implements ActionListener {
       l[i].setBounds(10,y,100,25);
       innerPanel.add(l[i]);
       c[i] = new JComboBox(DTCEnv.sigNames);
-      c[i].setBounds(110,y,250,25);
+      c[i].setBounds(110,y,260,25);
       c[i].setSelectedIndex(dtcEnv.getEnv(i));
       innerPanel.add(c[i]);
 
@@ -42,11 +42,11 @@ public class DTCEnvPanel extends JDialog implements ActionListener {
 
     applyButton = new JButton("Apply");
     applyButton.addActionListener(this);
-    applyButton.setBounds( 155,y,100,25 );
+    applyButton.setBounds( 165,y,100,25 );
     innerPanel.add(applyButton);
 
     cancelButton = new JButton("Cancel");
-    cancelButton.setBounds( 260,y,100,25 );
+    cancelButton.setBounds( 270,y,100,25 );
     cancelButton.addActionListener(this);
     innerPanel.add(cancelButton);
 

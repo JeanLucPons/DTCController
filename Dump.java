@@ -87,8 +87,8 @@ public class Dump {
             ret.classAddr = rSearch(MAP_ADD+MAP_SIZE-p1621.length,p1621) + 2;
             if(ret.classAddr<0)
                 throw new IOException(ERROR_STR);
-            byte[] p0520 = new byte[]{0x05,0x30};
-            int firstCode = rSearch(ret.classAddr,p0520);
+            byte[] p0530 = new byte[]{0x05,0x30};
+            int firstCode = rSearch(ret.classAddr,p0530);
             if(firstCode<0)
                 throw new IOException(ERROR_STR);
 
