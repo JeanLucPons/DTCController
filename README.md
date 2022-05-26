@@ -29,6 +29,13 @@ This will compile and execute the program, if you make modifcation of the source
 
 ![](https://github.com/JeanLucPons/DTCController/blob/main/docs/sccr1.jpg)
 
+You can also download the executable and precompiled jar file from [releases](https://github.com/JeanLucPons/DTCController/releases) and create a shorcut on it as below. Change the path to the JDK (or JRE) you are using:
+
+```
+Target: "C:\Program Files\jdk-18.0.1.1\bin\javaw.exe" -jar D:\Downloads\DTCController.jar
+```
+![](https://github.com/JeanLucPons/DTCController/blob/main/docs/shorcut.jpg)
+
 To disable a DTC, select disable in the class column (it disables the whole line). To disalbe only one DTC in the line, click on the Env button, and select "Sig unused" for the appropriate DTC. If you change settings of a DTC class, it will be applied to all DTC that belong to this class. The program outputs memory changes on the console.
 
 # How it works
