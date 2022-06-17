@@ -35,6 +35,8 @@ public class EDC16C34 extends JFrame implements ActionListener {
     private JMenuItem sortClassMenuItem;
     private JMenuItem noSortMenuItem;
     private JMenu classMenu;
+    private JMenu infoMenu;
+    private JMenuItem infoMenuItem;
 
     private JTextField softwareText;
     private JTextField projectText;
@@ -54,7 +56,7 @@ public class EDC16C34 extends JFrame implements ActionListener {
     private Vector<DTC> filteredDTC = new Vector<>();
     private int sortBy = 0;
 
-    private String APP_RELEASE = "v0.1";
+    private String APP_RELEASE = "v0.2";
 
     // Class Cell Renderer/Editor
     class DTCClassCellRenderer extends DefaultTableCellRenderer {
@@ -173,6 +175,17 @@ public class EDC16C34 extends JFrame implements ActionListener {
             });
             classMenu.add(clItem);
         }
+
+        infoMenu = new JMenu("Info");
+        infoMenuItem = new JMenuItem("View infos");
+        infoMenuItem.addActionListener(this);
+        infoMenuItem.addActionListener(e -> {
+            if(dump != null )
+              new InfoPanel(dump);
+        });
+        infoMenu.add(infoMenuItem);
+        menuBar.add(infoMenu);
+
 
         setJMenuBar(menuBar);
 
@@ -328,6 +341,10 @@ public class EDC16C34 extends JFrame implements ActionListener {
                                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                                 dump.write(f.getAbsolutePath());
                         } else {
+                          if(JOptionPane.showConfirmDialog(this,
+                                  "Do you want to correct the checksum ?",
+                                  "Question",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                              ChecksumHelper.correct(dump.memory);
                           dump.write(f.getAbsolutePath());
                         }
                     } catch (IOException ex) {
