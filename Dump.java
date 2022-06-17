@@ -98,7 +98,7 @@ public class Dump {
                 throw new IOException(ERROR_STR);
 
             // Start of DTC class definition 1 (from orig file)
-            ret.defClassAddr = search(MAP_ADD,new byte[]{1,1,0,2});
+            ret.defClassAddr = search(MAP_ADD,new byte[]{1,1,0,2,3});
 
         } else {
             throw new IOException(ERROR_STR);
