@@ -41,7 +41,7 @@ public class InfoPanel extends JDialog implements ActionListener {
 
         dismissButton = new JButton("Dismiss");
         dismissButton.addActionListener(this);
-        dismissButton.setBounds(495,420,95,25);
+        dismissButton.setBounds(395,420,95,25);
         innerPanel.add(dismissButton);
 
         setContentPane(innerPanel);
