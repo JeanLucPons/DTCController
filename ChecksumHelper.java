@@ -66,8 +66,8 @@ public class ChecksumHelper {
 
     public static BigInteger RSARootAttack1024(BigInteger sig,BigInteger n,int nth,int freeBit) {
 
-        // Sig has his message in the first (1024 - freeBit) bits. Other bits are unused.
-        // Try to find a RSA signature x such that pow(x,nth) = sig + offset(freeBit) + (lambda).n
+        // Sig has its message in the first (1024 - freeBit) bits. Other bits are unused.
+        // Try to find a RSA signature x such that pow(x,nth) = sig + offset + lambda.n, offset < 2^freeBit
 
         RootResult rr = null;
         boolean eos = false;
@@ -102,6 +102,8 @@ public class ChecksumHelper {
 
 
     public static byte[] getBuffer(BigInteger a,int size) {
+
+        // Return a buffer of the specified size for the given BigInteger
         byte[] ret = new byte[size];
         byte[] buff = a.toByteArray();
         int h = ret.length - buff.length;
@@ -114,6 +116,7 @@ public class ChecksumHelper {
         }
         System.arraycopy(buff,o,ret,h,l);
         return ret;
+
     }
 
     public static String getASCII(byte[] array) {
@@ -172,7 +175,7 @@ public class ChecksumHelper {
     public static long computeCS1(byte[] dump,long offset) {
 
         // Compute MAP checksum
-        // All orig file using RSA has an offset of 0 and
+        // All orig file using RSA has an offset of 0
         // This CS might not be checked by the ECU
         long sum = 0xA03FCA00L - SUM32(dump,0x1c0000,0x1FDF78) + offset;
         return sum&0xFFFFFFFFL;
