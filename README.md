@@ -9,8 +9,6 @@ a good job you can add your config to the list of know projects in the Dump.find
 share same addresses independently of the software number. The project is the identifier of the DaMOS (DAtabase for 
 Microcontroller-Oriented Systems) A2L description file [(ASAM-MCD-2MC)](https://www.asam.net/standards/detail/mcd-2-mc/) which contains characteristic addresses and descriptions.
 
-**Important:** DTCController does not compute any checksum, ensure that your OBD ECU programmer or your BDM computes the checksum for the modified file.
-
 # How to use
 
 - Download source code in a directory named DTCController or clone the repository using:
@@ -37,6 +35,12 @@ Target: "C:\Program Files\jdk-18.0.1.1\bin\javaw.exe" -jar D:\Downloads\DTCContr
 ![](https://github.com/JeanLucPons/DTCController/blob/main/docs/shorcut.jpg)
 
 To disable a DTC, select disable in the class column (it disables the whole line). To disalbe only one DTC in the line, click on the Env button, and select "Sig unused" for the appropriate DTC. If you change settings of a DTC class, it will be applied to all DTC that belong to this class. The program outputs memory changes on the console.
+
+# About checksum
+
+DTCController can correct the checksum when saving a file. You can also display some informations concerning checksums. It is possible, if you open an already modified file, that the 2 32bit checksums are not corresponding due to wrong checksum calculation by other tools. This 2 32 bits checksum are likely not checked by the ECU. The MD5 and RSA signature are both checked. In the signature of an orig file, you will find the signature date, if you have a MD5 that match and a RSA signature that contians a date (as below) then your file is likely an orig one.
+
+![](https://github.com/JeanLucPons/DTCController/blob/main/docs/sccr2.jpg)
 
 # How it works
 
