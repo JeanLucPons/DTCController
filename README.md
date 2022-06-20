@@ -38,7 +38,7 @@ To disable a DTC, select disable in the class column (it disables the whole line
 
 # About checksums
 
-DTCController can correct the checksums when saving a file. You can also display some informations concerning checksums. It is possible, if you open an already modified file, that the 2 32bit checksums are not corresponding to calculated ones due to wrong checksum calculation by other tools. This 2 32 bits checksums are likely not checked by the ECU. The MD5 and RSA signature are both checked. In the signature of an orig file, you will find the signature date, if you have a MD5 that match and a RSA signature that contians a date (as below) then your file is likely an orig one.
+DTCController can correct the checksums when saving a file. You can also display some informations concerning checksums. It is possible, when you open an already modified file, that the 2 32bit checksums are not corresponding to the calculated ones due to wrong checksum calculation by other tools. This 2 32 bits checksums are likely not checked by the ECU. However, both MD5 and RSA signature are checked. In the RSA signature of an orig file, you find the signature date. If you have a correct MD5 and a RSA signature that contains a date (as below) then your file is likely an orig one.
 
 ![](https://github.com/JeanLucPons/DTCController/blob/main/docs/sccr2.jpg)
 
