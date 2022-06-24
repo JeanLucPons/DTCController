@@ -85,6 +85,13 @@ public class ChecksumHelper {
             }
         }
 
+        // This will return a small number with lots of leading zero
+        // If you want to have a RSA signature that fills all the 128 bytes, you can for instance:
+        // Multiply the input sig by 7^3
+        // Ensure that the added offset is dividable by 7^3
+        // Ensure that the found root is not dividable by 7
+        // Multiply the found root by modInv(7,n) (mod n)
+        // As freeBit is large enough, this will require (in average) (7^3)*7/6=400 iterations.
         return rr.y.mod(n);
 
     }
